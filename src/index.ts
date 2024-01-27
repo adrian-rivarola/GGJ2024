@@ -1,6 +1,7 @@
 import { Game, Scale, Types, WEBGL } from 'phaser';
 
-import { Level1, LoadingScene, UIScene } from './scenes';
+import { Level1, TestScene, UIScene } from './scenes';
+import { LoadingScene } from './scenes/loading';
 
 type GameConfigExtended = Types.Core.GameConfig & {
   winScore: number;
@@ -10,7 +11,7 @@ export const gameConfig: GameConfigExtended = {
   title: 'Phaser game tutorial',
   type: WEBGL,
   parent: 'game',
-  backgroundColor: '#351f1b',
+  backgroundColor: '#FFFFFF',
   scale: {
     mode: Scale.ScaleModes.NONE,
     width: window.innerWidth,
@@ -36,7 +37,7 @@ export const gameConfig: GameConfigExtended = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [LoadingScene, Level1, UIScene],
+  scene: [LoadingScene, TestScene, Level1, UIScene],
   winScore: 40,
 };
 
