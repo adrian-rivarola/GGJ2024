@@ -7,6 +7,7 @@ import { Player } from './player';
 export class Enemy extends Actor {
   private target: Player;
   private AGRESSOR_RADIUS = 150;
+  private attackHandler: () => void;
   scale = 1.5;
 
   constructor(
@@ -20,6 +21,28 @@ export class Enemy extends Actor {
     super(scene, x, y, texture, frame);
     this.target = target;
 
+    this.attackHandler = () => {
+      if (
+        this.target.canAttack &&
+        Math.Distance.BetweenPoints(
+          { x: this.x, y: this.y },
+          { x: this.target.x, y: this.target.y },
+        ) <
+          this.target.width * 0.75 &&
+        this.flipX == this.target.scaleX > 0
+      ) {
+        this.getDamage();
+        this.disableBody(true, false);
+        this.tint = 0xff3333;
+
+        this.target.onEnemyKilled();
+
+        this.scene.time.delayedCall(100, () => {
+          this.destroy();
+        });
+      }
+    };
+
     // ADD TO SCENE
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -29,11 +52,32 @@ export class Enemy extends Actor {
     this.getBody().setOffset(0, 0);
 
     // EVENTS
-    // this.scene.game.events.on(EVENTS_NAME.attack, this.attackHandler, this);
-    // this.on('destroy', () => {
-    //   this.scene.game.events.removeListener(EVENTS_NAME.attack, this.attackHandler);
-    // });
+    this.scene.game.events.on(EVENTS_NAME.attack, this.attackHandler, this);
+    this.on('destroy', () => {
+      this.scene.game.events.removeListener(EVENTS_NAME.attack, this.attackHandler);
+    });
   }
 
-  preUpdate(): void {}
+  preUpdate(): void {
+    if (
+      Math.Distance.BetweenPoints(
+        { x: this.x, y: this.y },
+        { x: this.target.x, y: this.target.y },
+      ) < this.AGRESSOR_RADIUS
+    ) {
+      this.getBody().setVelocityX(this.target.x - this.x);
+      this.getBody().setVelocityY(this.target.y - this.y);
+      this.checkFlip();
+    } else {
+      this.getBody().setVelocity(0);
+    }
+  }
+
+  protected checkFlip(): void {
+    this.flipX = this.body.velocity.x < 0;
+  }
+
+  public setTarget(target: Player): void {
+    this.target = target;
+  }
 }
