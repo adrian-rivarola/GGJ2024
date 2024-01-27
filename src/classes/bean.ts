@@ -4,9 +4,8 @@ import { EVENTS_NAME } from '../consts';
 import { Actor } from './actor';
 import { Player } from './player';
 
-export class Chest extends Actor {
+export class Bean extends Actor {
   private target: Player;
-  private DAMAGE_POINTS = 15;
   private RESPAWN_TIME = 15000;
 
   constructor(
@@ -59,14 +58,8 @@ export class Chest extends Actor {
   private initOverlap(): void {
     const overlap = this.scene.physics.add.overlap(this.target, this, () => {
       this.scene.physics.world.removeCollider(overlap);
-      if (Math.random() < 0.3) {
-        this.anims.play('bad');
-        this.target.getDamage(this.DAMAGE_POINTS);
-      } else {
-        this.scene.sound.add('pickupCoin').play();
-        this.anims.play('good');
-        this.scene.game.events.emit(EVENTS_NAME.chestLoot);
-      }
+      this.anims.play('bad');
+      this.scene.game.events.emit(EVENTS_NAME.beanCollected);
 
       this.scene.time.delayedCall(this.RESPAWN_TIME, () => {
         this.enableBody(true, this.x, this.y, true, true);

@@ -1,6 +1,6 @@
 import { GameObjects, Scene, Tilemaps } from 'phaser';
 
-import { Chest } from '../../classes/chest';
+import { Bean } from '../../classes/bean';
 import { Player } from '../../classes/player';
 import { Enemy } from '../../classes/enemy';
 import { Spawner } from '../../classes/spawner';
@@ -54,7 +54,7 @@ export class Level1 extends Scene {
     );
 
     this.chests = chestPoints.map((chestPoint) =>
-      new Chest(this, chestPoint.x, chestPoint.y, 'tiles_spr', this.player, 595).setScale(1.5),
+      new Bean(this, chestPoint.x, chestPoint.y, 'tiles_spr', this.player, 595).setScale(1.5),
     );
   }
 
