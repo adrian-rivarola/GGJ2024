@@ -41,6 +41,9 @@ export class LoadingScene extends Scene {
     for (let i = 1; i <= 10; i++) {
       this.load.audio(`fart${i - 1}`, `sounds/Fart_${i}.wav`);
     }
+    for (let i = 1; i <= 16; i++) {
+      this.load.image(`fart${i - 1}`, `sprites/fart/fart-${i}.png`);
+    }
   }
 
   create(): void {

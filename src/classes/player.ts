@@ -2,6 +2,7 @@ import { Input, Scene } from 'phaser';
 
 import { EVENTS_NAME, GameStatus } from '../consts';
 import { Actor } from './actor';
+import { Fart } from './fart';
 
 export class Player extends Actor {
   private keyW: Input.Keyboard.Key;
@@ -141,6 +142,8 @@ export class Player extends Actor {
 
   private fart(): void {
     this.scene.sound.add(`fart${Math.floor(Math.random() * 10)}`).play();
+    const x = this.x + (!this.flipX ? -this.body.width : this.body.width)
+    new Fart(this.scene, x, this.y, !this.flipX).anims.play('explosion', true);
   }
 
   private initAnimations(): void {
@@ -186,7 +189,7 @@ export class Player extends Actor {
     this.scene.time.delayedCall(100, () => this.clearTint());
 
     if (this.normalizedHP < prevHP) {
-      this.scene.sound.add('badChest').play();
+      // this.scene.sound.add('badChest').play();
     }
 
     if (this.hp <= 0) {
