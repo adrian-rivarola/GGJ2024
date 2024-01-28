@@ -15,6 +15,7 @@ export class BaseNPC extends Actor {
   timesTalkedTo: number = 0;
   name: string;
   player: Player;
+  scale = 1.5;
 
   constructor(scene: Scene, x: number, y: number, name: string, player: Player) {
     super(scene, x, y, NPC_TEXTURES[name], '');
@@ -23,8 +24,8 @@ export class BaseNPC extends Actor {
     this.player = player;
 
     // PHYSICS MODEL
-    this.getBody().setSize(16, 16);
-    this.getBody().setOffset(8, 8);
+    this.getBody().setSize(15, 20);
+    // this.getBody().setOffset(8, 8);
     this.body.immovable = true;
 
     // ANIMATIONS

@@ -9,7 +9,7 @@ export class LoadingScene extends Scene {
     this.load.baseURL = 'assets/';
 
     // PLAYER LOADING
-    this.load.image('king', 'sprites/king.png');
+    this.load.image('king', 'sprites/char.png');
     this.load.atlas('a-king', 'spritesheets/a-king.png', 'spritesheets/a-king_atlas.json');
 
     // MAP LOADING

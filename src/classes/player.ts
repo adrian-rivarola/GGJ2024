@@ -22,6 +22,7 @@ export class Player extends Actor {
   private hpInterval!: NodeJS.Timeout;
   // private powerUpCollectedHandler: (type: string) => void;
   disabled = false;
+  scale = 1.5;
 
   constructor(scene: Scene, x: number, y: number) {
     super(scene, x, y, 'king');
@@ -60,14 +61,14 @@ export class Player extends Actor {
     });
 
     // PHYSICS
-    this.getBody().setSize(30, 30);
-    this.getBody().setOffset(8, 0);
+    this.getBody().setSize(15, 20);
+    // this.getBody().setOffset(8, 0);
 
     // EVENTS
     this.initListeners();
 
     // ANIMATIONS
-    this.initAnimations();
+    // this.initAnimations();
     this.setDepth(10);
 
     this.hpInterval = setInterval(() => {
@@ -121,7 +122,7 @@ export class Player extends Actor {
     if (this.keyA?.isDown) {
       this.body.velocity.x = -movement;
       this.checkFlip();
-      this.getBody().setOffset(30, 15);
+      // this.getBody().setOffset(30, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
 
@@ -133,7 +134,7 @@ export class Player extends Actor {
     if (this.keyD?.isDown) {
       this.body.velocity.x = movement;
       this.checkFlip();
-      this.getBody().setOffset(15, 15);
+      // this.getBody().setOffset(15, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
   }

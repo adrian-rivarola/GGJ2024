@@ -18,5 +18,18 @@ export class Larissa extends BaseNPC {
       answers: ['Gracias', '*Farts*'],
     };
     this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
+
+    this.scene.game.events.once(EVENTS_NAME.dialogEnded, (selectedOption: number) => {
+      if (selectedOption == 2) {
+        this.scene.tweens.add({
+          targets: this,
+          duration: 1500,
+          alpha: 0,
+          onComplete: () => {
+            this.destroy();
+          },
+        });
+      }
+    });
   }
 }
