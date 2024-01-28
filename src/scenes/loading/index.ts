@@ -10,6 +10,14 @@ export class LoadingScene extends Scene {
 
     // PLAYER LOADING
     this.load.image('king', 'sprites/char.png');
+    this.load.image('chespi', 'sprites/npcs/Chespi.png');
+    this.load.image('croto', 'sprites/npcs/Croto.png');
+    this.load.image('edgar', 'sprites/npcs/Edgar.png');
+    this.load.image('guardia', 'sprites/npcs/Guardia.png');
+    this.load.image('larissa', 'sprites/npcs/Larissa.png');
+    this.load.image('morzadella', 'sprites/npcs/Morzadella.png');
+    this.load.image('pancho_cobra', 'sprites/npcs/PanchoCobra.png');
+
     this.load.atlas('a-king', 'spritesheets/a-king.png', 'spritesheets/a-king_atlas.json');
 
     // MAP LOADING

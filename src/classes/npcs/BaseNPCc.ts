@@ -5,10 +5,13 @@ import { EVENTS_NAME } from '../../consts';
 import { Player } from '../player';
 
 const NPC_TEXTURES: Record<string, string> = {
-  Croto: 'king',
-  Mozart: 'king',
-  Larissa: 'king',
-  Guardia: 'king',
+  Croto: 'croto',
+  Mozart: 'morzadella',
+  Larissa: 'larissa',
+  Guardia: 'guardia',
+  PanchoCobra: 'pancho_cobra',
+  Edgar: 'edgar',
+  Chespi: 'chespi',
 };
 
 export class BaseNPC extends Actor {
