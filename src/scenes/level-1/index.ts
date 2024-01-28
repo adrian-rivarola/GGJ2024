@@ -7,6 +7,7 @@ import { Spawner } from '../../classes/spawner';
 import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
 
 import { EVENTS_NAME, UpdateLifeOperation } from '../../consts';
+import { Pepper } from '../../classes/pepper';
 
 export class Level1 extends Scene {
   private player!: Player;
@@ -54,7 +55,7 @@ export class Level1 extends Scene {
     );
 
     this.chests = chestPoints.map((chestPoint) =>
-      new Bean(this, chestPoint.x, chestPoint.y, 'tiles_spr', this.player, 595).setScale(1.5),
+      new Pepper(this, chestPoint.x, chestPoint.y, 'tiles_spr', this.player, 595).setScale(1.5),
     );
   }
 

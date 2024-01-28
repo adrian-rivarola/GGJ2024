@@ -17,7 +17,8 @@ export class Player extends Actor {
   private maxHP = 90;
   private maxBeans = 10;
   private dash = false;
-  beanCollectedHandler!: () => void;
+  private pepper = false;
+  private powerUpCollectedHandler: (type: string) => void;
 
   constructor(scene: Scene, x: number, y: number) {
     super(scene, x, y, 'king');
@@ -33,7 +34,7 @@ export class Player extends Actor {
     this.keyShift.on('down', (event: KeyboardEvent) => {
       if (this.beans > 0) {
         this.beans--;
-        this.scene.game.events.emit(EVENTS_NAME.beansChange, this.beans);
+        this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
         this.anims.play('dash', true);
         this.dash = true;
         this.body.checkCollision.none = true;
@@ -62,9 +63,17 @@ export class Player extends Actor {
       this.keySpace.removeAllListeners();
     });
 
-    this.beanCollectedHandler = () => {
-      if (this.beans < this.maxBeans) {
-        this.updateBeans(1);
+    this.powerUpCollectedHandler = (type: string) => {
+      switch (type) {
+        case 'Bean':
+          if (this.beans < this.maxBeans) {
+            this.updateBeans(1);
+          }
+          break;
+        case 'Pepper':
+          this.pepper = true;
+          this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
+          break;
       }
     };
 
@@ -81,7 +90,7 @@ export class Player extends Actor {
 
   updateBeans(value: number) {
     this.beans = Phaser.Math.Clamp(this.beans + value, 0, this.maxBeans);
-    this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans);
+    this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
   }
 
   updateHp(value: number) {
@@ -157,7 +166,7 @@ export class Player extends Actor {
   }
 
   private initListeners() {
-    this.scene.game.events.on(EVENTS_NAME.beanCollected, this.beanCollectedHandler);
+    this.scene.game.events.on(EVENTS_NAME.powerUpCollected, this.powerUpCollectedHandler);
   }
 
   public getDamage(value?: number): void {

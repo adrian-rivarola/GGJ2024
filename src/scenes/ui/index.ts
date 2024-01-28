@@ -66,7 +66,7 @@ export class UIScene extends Scene {
     this.createHearts();
     this.createBeans();
     this.updateLife(this.maxHearts * 2);
-    this.updateBeans(0);
+    this.updateBeans(0, false);
   }
 
   createHearts() {
@@ -87,17 +87,22 @@ export class UIScene extends Scene {
     }
   }
 
-  updateBeans(beans: number) {
-    let maxH = this.maxBeans;
+  updateBeans(beans: number, pepper: boolean) {
+    let lastBean = this.maxBeans;
     for (let i = 0; i < beans / 2; i++) {
       this.beans[i].setFrame(HeartFrames.FULL_HEART);
-      maxH = i;
+      lastBean = i
     }
     if (beans % 2 !== 0) {
-      this.beans[maxH].setFrame(HeartFrames.HALF_HEART);
+      this.beans[lastBean].setFrame(HeartFrames.HALF_HEART);
     }
-    for (let i = Math.ceil(beans / 2); i < maxH; i++) {
+    for (let i = Math.ceil(beans / 2); i < this.maxBeans; i++) {
       this.beans[i].setFrame(HeartFrames.EMPTY_HEART);
+    }
+    if (pepper) {
+      this.beans.forEach((bean) => {
+        bean.toggleFlipY();
+      });
     }
   }
 

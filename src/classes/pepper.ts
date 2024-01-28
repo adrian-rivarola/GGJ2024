@@ -3,7 +3,7 @@ import { Scene } from 'phaser';
 import { Player } from './player';
 import { PowerUp } from './power-up';
 
-export class Bean extends PowerUp {
+export class Pepper extends PowerUp {
   protected animations = [
     {
       key: 'good',
@@ -39,6 +39,6 @@ export class Bean extends PowerUp {
   }
 
   protected overlap(): void {
-    this.anims.play('good');
+    this.anims.play('bad');
   }
 }

@@ -1,7 +1,7 @@
 export enum EVENTS_NAME {
   gameEnd = 'game-end',
   levelUp = 'level-up',
-  beanCollected = 'bean-collected',
+  powerUpCollected = 'power-up-collected',
   attack = 'attack',
   hpChange = 'hp-change',
   beansChange = 'beans-change',
