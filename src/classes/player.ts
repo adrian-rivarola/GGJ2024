@@ -61,6 +61,9 @@ export class Player extends Actor {
     this.getBody().setSize(30, 30);
     this.getBody().setOffset(8, 0);
 
+    // EVENTS
+    this.initListeners();
+
     // ANIMATIONS
     this.initAnimations();
     this.setDepth(10);
@@ -165,9 +168,12 @@ export class Player extends Actor {
     });
   }
 
-  // private initListeners() {
-  //   this.scene.game.events.on(EVENTS_NAME.powerUpCollected, this.powerUpCollectedHandler);
-  // }
+  private initListeners() {
+    // this.scene.game.events.on(EVENTS_NAME.powerUpCollected, this.powerUpCollectedHandler);
+    this.scene.game.events.on(EVENTS_NAME.dialogEnded, () => {
+      this.disabled = false;
+    });
+  }
 
   public getDamage(value?: number): void {
     if (!value || this.dash) return;
