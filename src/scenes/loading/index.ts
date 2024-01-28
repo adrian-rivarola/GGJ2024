@@ -38,10 +38,9 @@ export class LoadingScene extends Scene {
     // this.load.image('slimeImg', 'sprites/slime.png');
     this.load.atlas('slimeAtlas', 'sprites/slime.png', 'spritesheets/slime_atlas.json');
 
-    // this.load.audio('fondo', 'sounds/fondo.mp3');
-    this.load.audio('hitHurt', 'sounds/hitHurt.wav');
-    this.load.audio('pickupCoin', 'sounds/pickupCoin.wav');
-    this.load.audio('badChest', 'sounds/badChest.wav');
+    for (let i = 1; i <= 10; i++) {
+      this.load.audio(`fart${i - 1}`, `sounds/Fart_${i}.wav`);
+    }
   }
 
   create(): void {

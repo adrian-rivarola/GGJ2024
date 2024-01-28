@@ -35,6 +35,7 @@ export class Player extends Actor {
       if (this.beans > 0) {
         this.beans--;
         this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
+        this.fart();
         this.anims.play('dash', true);
         this.dash = true;
         this.body.checkCollision.none = true;
@@ -48,6 +49,7 @@ export class Player extends Actor {
 
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.enemiesHit = 0;
+      this.fart();
       this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
@@ -103,7 +105,7 @@ export class Player extends Actor {
     this.enemiesHit++;
 
     if (this.enemiesHit < 2) {
-      this.scene.sound.add('hitHurt').play();
+      // this.scene.sound.add('hitHurt').play();
       this.scene.cameras.main.shake(50, new Phaser.Math.Vector2(0.005, 0.0));
     }
   }
@@ -135,6 +137,10 @@ export class Player extends Actor {
       this.getBody().setOffset(15, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
+  }
+
+  private fart(): void {
+    this.scene.sound.add(`fart${Math.floor(Math.random() * 10)}`).play();
   }
 
   private initAnimations(): void {
