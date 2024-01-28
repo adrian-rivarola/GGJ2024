@@ -1,4 +1,5 @@
 .cache/
+docs/
 coverage/
 dist/
 !dist/index.html

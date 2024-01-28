@@ -1,16 +1,17 @@
 import { Math, Scene } from 'phaser';
-import type { Level1 } from 'src/scenes';
+import type { TestScene } from 'src/scenes';
 
 import config from '../config';
 import { Actor } from './actor';
 import { Enemy } from './enemy';
 import { Player } from './player';
+import { Slime } from './slime';
 
-export class Spawner extends Actor {
+export class SlimeSpawner extends Actor {
   private target: Player;
   private SPAWN_RADIUS = 25;
-  private ACTIVATION_RADIUS = 150;
-  private COOL_DOWN_DURATION = 120;
+  private ACTIVATION_RADIUS = 120;
+  private COOL_DOWN_DURATION = 180;
   private coolDownTimer = 0;
   private MIN_SPAWNS = 0;
   private MAX_SPAWNS = 3;
@@ -26,12 +27,11 @@ export class Spawner extends Actor {
     super(scene, x, y, texture, frame);
     this.target = target;
     this.alpha = 0;
-
-    // ADD TO SCENE
-    scene.add.existing(this);
   }
 
-  preUpdate(): void {
+  preUpdate(time: number, delta: number): void {
+    super.preUpdate(time, delta);
+
     if (config.debug) {
       const graphic = this.scene.add.graphics();
       graphic.strokeCircle(this.x, this.y, this.ACTIVATION_RADIUS);
@@ -44,7 +44,7 @@ export class Spawner extends Actor {
       ) < this.ACTIVATION_RADIUS &&
       this.coolDownTimer-- <= 0
     ) {
-      (this.scene as Level1).addEnemies(this.createEnemies());
+      (this.scene as TestScene).addEnemies(this.createEnemies());
       this.coolDownTimer = this.COOL_DOWN_DURATION;
     }
   }
@@ -56,7 +56,7 @@ export class Spawner extends Actor {
     for (let idx = 0; idx < newEnemies; idx++) {
       const x = Math.Between(this.x - this.SPAWN_RADIUS, this.x + this.SPAWN_RADIUS);
       const y = Math.Between(this.y - this.SPAWN_RADIUS, this.y + this.SPAWN_RADIUS);
-      const enemy = new Enemy(this.scene, x, y, this.target, () => {});
+      const enemy = new Slime(this.scene, x, y, '', this.target);
       enemies.push(enemy);
     }
     return enemies;

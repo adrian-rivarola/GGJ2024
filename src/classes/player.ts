@@ -58,6 +58,7 @@ export class Player extends Actor {
 
     // ANIMATIONS
     this.initAnimations();
+    this.setDepth(10);
 
     this.on('destroy', () => {
       this.keySpace.removeAllListeners();
@@ -119,7 +120,7 @@ export class Player extends Actor {
     if (this.keyA?.isDown) {
       this.body.velocity.x = -movement;
       this.checkFlip();
-      this.getBody().setOffset(48, 15);
+      this.getBody().setOffset(30, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
 

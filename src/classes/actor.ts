@@ -3,7 +3,13 @@ import { Physics } from 'phaser';
 export class Actor extends Physics.Arcade.Sprite {
   protected hp = 90;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    texture: string = '',
+    frame?: string | number,
+  ) {
     super(scene, x, y, texture, frame);
 
     scene.add.existing(this);
@@ -37,9 +43,9 @@ export class Actor extends Physics.Arcade.Sprite {
 
   protected checkFlip(): void {
     if (this.body.velocity.x < 0) {
-      this.scaleX = -1;
+      this.flipX = true;
     } else {
-      this.scaleX = 1;
+      this.flipX = false;
     }
   }
 

@@ -1,10 +1,7 @@
-import { Game, GameObjects, Scene } from 'phaser';
+import { GameObjects, Scene } from 'phaser';
 
-import { EVENTS_NAME, GameStatus, UpdateLifeOperation } from '../../consts';
-import { Level, LevelOperations } from '../../classes/score';
 import { Text } from '../../classes/text';
-import { gameConfig } from '../../';
-import { Player } from 'src/classes/player';
+import { EVENTS_NAME, GameStatus } from '../../consts';
 
 enum HeartFrames {
   FULL_HEART = 530,
@@ -13,7 +10,6 @@ enum HeartFrames {
 }
 
 export class UIScene extends Scene {
-  private level!: Level;
   private gameEndPhrase!: Text;
   private hearts: GameObjects.Sprite[] = [];
   private beans: GameObjects.Sprite[] = [];
@@ -29,7 +25,7 @@ export class UIScene extends Scene {
       console.log('GAME OVER');
 
       this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
-      this.game.scene.pause('level-1-scene');
+      this.game.scene.pause('test-scene');
 
       this.gameEndPhrase = new Text(
         this,
@@ -49,7 +45,7 @@ export class UIScene extends Scene {
 
       this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get('level-1-scene').scene.restart();
+        this.scene.get('test-scene').scene.restart();
         this.scene.restart();
 
         this.maxHearts = 3;
@@ -60,7 +56,6 @@ export class UIScene extends Scene {
   }
 
   create(): void {
-    this.level = new Level(this, 20, 20, 0);
     this.initListeners();
 
     this.createHearts();

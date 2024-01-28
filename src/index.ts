@@ -3,6 +3,8 @@ import { Game, Scale, Types, WEBGL } from 'phaser';
 import { Level1, TestScene, UIScene } from './scenes';
 import { LoadingScene } from './scenes/loading';
 
+import config from './config';
+
 type GameConfigExtended = Types.Core.GameConfig & {
   winScore: number;
 };
@@ -20,7 +22,8 @@ export const gameConfig: GameConfigExtended = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false,
+      debug: config.debug,
+      debugShowBody: config.debug,
     },
   },
   render: {

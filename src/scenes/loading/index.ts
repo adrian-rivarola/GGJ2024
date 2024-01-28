@@ -28,6 +28,16 @@ export class LoadingScene extends Scene {
 
     this.load.atlas('enemy', 'tilemaps/tiles/dungeon-16-16.png', 'spritesheets/enemy_atlas.json');
 
+    // NEW LOADING
+    this.load.image('plains_tiles', 'tilemaps/tiles/plains.png');
+    this.load.image('fences_tiles', 'tilemaps/tiles/fences.png');
+    this.load.image('grass_tiles', 'tilemaps/tiles/grass.png');
+    this.load.tilemapTiledJSON('plainsMap', 'tilemaps/json/plainsMap.json');
+
+    // Player assets
+    // this.load.image('slimeImg', 'sprites/slime.png');
+    this.load.atlas('slimeAtlas', 'sprites/slime.png', 'spritesheets/slime_atlas.json');
+
     // this.load.audio('fondo', 'sounds/fondo.mp3');
     this.load.audio('hitHurt', 'sounds/hitHurt.wav');
     this.load.audio('pickupCoin', 'sounds/pickupCoin.wav');
@@ -36,5 +46,6 @@ export class LoadingScene extends Scene {
 
   create(): void {
     this.scene.start('test-scene');
+    this.scene.start('ui-scene');
   }
 }
