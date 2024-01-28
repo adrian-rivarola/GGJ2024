@@ -73,6 +73,9 @@ export class Player extends Actor {
         this.hp++;
         this.updateHp(0);
       }
+      if (Date.now() % 5 == 0) {
+        this.fart();
+      }
     }, 2000);
 
     this.on('destroy', () => {
