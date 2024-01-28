@@ -14,10 +14,11 @@ export class Player extends Actor {
   // private hpText!: Text;
   private maxHitsPerAttack = 2;
   private enemiesHit = 0;
-  private maxHP = 90;
+  private maxHP = 5;
   private dash = false;
   private pepper = false;
-  private powerUpCollectedHandler: (type: string) => void;
+  private hpInterval!: NodeJS.Timeout;
+  // private powerUpCollectedHandler: (type: string) => void;
 
   constructor(scene: Scene, x: number, y: number) {
     super(scene, x, y, 'king');
@@ -31,7 +32,6 @@ export class Player extends Actor {
     this.keySpace = this.scene.input.keyboard.addKey(32);
 
     this.keyShift.on('down', (event: KeyboardEvent) => {
-      this.getDamage(5);
       this.fart();
       this.anims.play('dash', true);
       this.dash = true;
@@ -45,7 +45,6 @@ export class Player extends Actor {
 
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.enemiesHit = 0;
-      this.getDamage(5);
       this.fart();
       this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
@@ -59,37 +58,26 @@ export class Player extends Actor {
     this.initAnimations();
     this.setDepth(10);
 
+    this.hpInterval = setInterval(() => {
+      if (this.hp < this.maxHP) {
+        this.hp++;
+        this.updateHp(0);
+      }
+    }, 2000);
+
     this.on('destroy', () => {
       this.keySpace.removeAllListeners();
     });
-
-    this.powerUpCollectedHandler = (type: string) => {
-      switch (type) {
-        case 'Bean':
-          if (this.hp < this.maxHP) {
-            this.updateHp(15);
-          }
-          break;
-        case 'Pepper':
-          this.pepper = true;
-          break;
-      }
-    };
-
-    this.initListeners();
   }
 
   get canAttack(): boolean {
     return this.enemiesHit < Math.floor(this.maxHitsPerAttack);
   }
 
-  get normalizedHP() {
-    return Math.floor(this.hp / 15);
-  }
-
   updateHp(value: number) {
-    this.hp = Phaser.Math.Clamp(this.hp + value, 0, this.maxHP);
-    this.scene?.game.events.emit(EVENTS_NAME.hpChange, this.normalizedHP);
+    if (this.hp > 0) {
+      this.scene?.game.events.emit(EVENTS_NAME.hpChange, this.hp + value);
+    }
   }
 
   onEnemyKilled() {
@@ -131,6 +119,7 @@ export class Player extends Actor {
   }
 
   private fart(): void {
+    this.getDamage(1);
     this.scene.sound.add(`fart${Math.floor(Math.random() * 10)}`).play();
     const x = this.x + (!this.flipX ? -this.body.width : this.body.width)
     new Fart(this.scene, x, this.y, !this.flipX).anims.play('explosion', true);
@@ -165,25 +154,21 @@ export class Player extends Actor {
     });
   }
 
-  private initListeners() {
-    this.scene.game.events.on(EVENTS_NAME.powerUpCollected, this.powerUpCollectedHandler);
-  }
+  // private initListeners() {
+  //   this.scene.game.events.on(EVENTS_NAME.powerUpCollected, this.powerUpCollectedHandler);
+  // }
 
   public getDamage(value?: number): void {
     if (!value || this.dash) return;
 
-    var prevHP = this.normalizedHP;
-
     super.getDamage(value);
-    this.updateHp(-value);
-    this.scene.time.delayedCall(100, () => this.clearTint());
-
-    if (this.normalizedHP < prevHP) {
-      // this.scene.sound.add('badChest').play();
-    }
 
     if (this.hp <= 0) {
+      clearInterval(this.hpInterval);
       this.scene.game.events.emit(EVENTS_NAME.gameEnd, GameStatus.LOSE);
     }
+
+    this.updateHp(-value);
+    this.scene.time.delayedCall(100, () => this.clearTint());
   }
 }
