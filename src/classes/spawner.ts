@@ -56,7 +56,7 @@ export class Spawner extends Actor {
     for (let idx = 0; idx < newEnemies; idx++) {
       const x = Math.Between(this.x - this.SPAWN_RADIUS, this.x + this.SPAWN_RADIUS);
       const y = Math.Between(this.y - this.SPAWN_RADIUS, this.y + this.SPAWN_RADIUS);
-      const enemy = new Enemy(this.scene, x, y, this.target, () => {});
+      const enemy = new Enemy(this.scene, x, y, this.target, '', () => {});
       enemies.push(enemy);
     }
     return enemies;

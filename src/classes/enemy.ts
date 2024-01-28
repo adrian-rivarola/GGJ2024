@@ -10,8 +10,15 @@ export class Enemy extends Actor {
   protected attackHandler: Function;
   scale = 1.5;
 
-  constructor(scene: Scene, x: number, y: number, target: Player, attackHandler: Function) {
-    super(scene, x, y);
+  constructor(
+    scene: Scene,
+    x: number,
+    y: number,
+    target: Player,
+    texture: string,
+    attackHandler: Function,
+  ) {
+    super(scene, x, y, texture);
     this.target = target;
     this.attackHandler = attackHandler;
 

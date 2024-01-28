@@ -4,3 +4,4 @@ export * from './Croto';
 export * from './Larissa';
 export * from './Guardia';
 export * from './Panchero';
+export * from '../chespi';

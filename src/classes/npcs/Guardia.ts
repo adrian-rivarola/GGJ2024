@@ -19,6 +19,9 @@ export class Guardia extends BaseNPC {
     };
     this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
 
+    this.scene.game.events.once(EVENTS_NAME.dialogEnded, (selectedOption: number) => {
+      this.scene.game.events.emit(EVENTS_NAME.spawnChespies);
+    });
     // onEnd: Empiezen a aparecer monedas
   }
 }

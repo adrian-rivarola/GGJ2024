@@ -909,8 +909,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":601.268484645055,
-                 "y":308.879813386115
+                 "x":633.032523215673,
+                 "y":331.568412365128
                 }, 
                 {
                  "height":0,
@@ -1012,9 +1012,44 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"ChespiSpawner",
+         "objects":[
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"ChespiSpawner",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1081.11174134997,
+                 "y":140.669313669881
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"ChespiSpawner",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":483.267158252978,
+                 "y":603.516732841747
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":13,
+ "nextlayerid":10,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

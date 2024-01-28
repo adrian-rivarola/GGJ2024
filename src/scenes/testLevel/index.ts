@@ -1,7 +1,8 @@
 import { Scene, Tilemaps } from 'phaser';
-import { BaseNPC, Enemy, Player, SlimeSpawner } from '../../classes';
+import { BaseNPC, ChespiSpawner, Enemy, Player } from '../../classes';
 import { Croto, Guardia, Larissa, Mozart, Panchero } from '../../classes/npcs';
 import config from '../../config';
+import { EVENTS_NAME } from '../../consts';
 import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
 
 export class TestScene extends Scene {
@@ -58,18 +59,17 @@ export class TestScene extends Scene {
 
   createSpawners() {
     const enemiesPoints = gameObjectsToObjectPoints(
-      this.map.filterObjects('SlimeSpawner', (obj) => obj.name === 'SlimeSpawner'),
+      this.map.filterObjects('ChespiSpawner', (obj) => obj.name === 'ChespiSpawner'),
     );
+    console.log('creating chespi spawner: %d', enemiesPoints);
     enemiesPoints.forEach((obj) => {
-      const spawner = new SlimeSpawner(this, obj.x, obj.y, '', this.player);
+      const spawner = new ChespiSpawner(this, obj.x, obj.y, '', this.player);
       this.addEnemies(spawner.createEnemies());
     });
   }
 
   // TODO: Improve this
   create(): void {
-    console.log('Scene.create()');
-
     this.map = this.make.tilemap({ key: 'plainsMap' });
 
     // add the tileset image we are using
@@ -97,6 +97,8 @@ export class TestScene extends Scene {
         collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
       });
     }
+
+    this.game.events.on(EVENTS_NAME.spawnChespies, this.createSpawners, this);
 
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
     this.cameras.main.startFollow(this.player, true, 0.09, 0.09);

@@ -5,16 +5,16 @@ import config from '../config';
 import { Actor } from './actor';
 import { Enemy } from './enemy';
 import { Player } from './player';
-import { Slime } from './slime';
+import { Chespi } from './chespi';
 
-export class SlimeSpawner extends Actor {
+export class ChespiSpawner extends Actor {
   private target: Player;
-  private SPAWN_RADIUS = 25;
-  private ACTIVATION_RADIUS = 120;
-  private COOL_DOWN_DURATION = 180;
+  private SPAWN_RADIUS = 20;
+  private ACTIVATION_RADIUS = 100;
+  private COOL_DOWN_DURATION = 200;
   private coolDownTimer = 0;
   private MIN_SPAWNS = 0;
-  private MAX_SPAWNS = 3;
+  private MAX_SPAWNS = 1;
 
   constructor(
     scene: Scene,
@@ -56,7 +56,7 @@ export class SlimeSpawner extends Actor {
     for (let idx = 0; idx < newEnemies; idx++) {
       const x = Math.Between(this.x - this.SPAWN_RADIUS, this.x + this.SPAWN_RADIUS);
       const y = Math.Between(this.y - this.SPAWN_RADIUS, this.y + this.SPAWN_RADIUS);
-      const enemy = new Slime(this.scene, x, y, '', this.target);
+      const enemy = new Chespi(this.scene, x, y, 'king', this.target);
       enemies.push(enemy);
     }
     return enemies;
