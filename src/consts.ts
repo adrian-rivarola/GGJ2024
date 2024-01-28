@@ -4,6 +4,7 @@ export enum EVENTS_NAME {
   powerUpCollected = 'power-up-collected',
   attack = 'attack',
   hpChange = 'hp-change',
+  coinChange = 'coin-change',
   beansChange = 'beans-change',
   dialogAction = 'dialog-action',
   dialogStarted = 'dialog-started',

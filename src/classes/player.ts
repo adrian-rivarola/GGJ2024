@@ -17,6 +17,8 @@ export class Player extends Actor {
   private maxHP = 5;
   private dash = false;
   private pepper = false;
+  private coins = 0;
+  private maxCoins = 3;
   private hpInterval!: NodeJS.Timeout;
   // private powerUpCollectedHandler: (type: string) => void;
   disabled = false;
@@ -94,6 +96,7 @@ export class Player extends Actor {
   }
 
   onEnemyKilled() {
+    this.getCoin();
     this.enemiesHit++;
 
     if (this.enemiesHit < 2) {
@@ -132,6 +135,14 @@ export class Player extends Actor {
       this.checkFlip();
       this.getBody().setOffset(15, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
+    }
+  }
+
+  private getCoin(): void {
+    if (this.coins < this.maxCoins && Math.floor(Math.random() * 10) <= 3) {
+      this.coins++;
+      this.scene.sound.add('pickupCoin').play();
+      this.scene?.game.events.emit(EVENTS_NAME.coinChange, this.coins);
     }
   }
 

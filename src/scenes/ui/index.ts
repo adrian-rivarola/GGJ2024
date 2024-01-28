@@ -14,6 +14,7 @@ enum HeartFrames {
 export class UIScene extends Scene {
   private gameEndPhrase!: Text;
   private hearts!: Text;
+  private coins!: Text;
   maxHearts = 5;
 
   private gameEndHandler: (status: GameStatus) => void;
@@ -58,6 +59,7 @@ export class UIScene extends Scene {
     this.initListeners();
 
     this.createHearts();
+    this.createCoins();
     // this.createBeans();
     this.updateLife(this.maxHearts);
     // this.updateBeans(0, false);
@@ -72,8 +74,21 @@ export class UIScene extends Scene {
     );
   }
 
+  createCoins() {
+    this.coins = new Text(
+      this,
+      this.game.scale.width - this.game.scale.width / 8,
+      20,
+      ''
+    );
+  }
+
   updateLife(life: number) {
     this.hearts.text = '💨'.repeat(life);
+  }
+
+  updateCoins(coins: number) {
+    this.coins.text = `${coins} 🪙`;
   }
 
   handleDialog(options: DialogOptions) {
@@ -82,6 +97,7 @@ export class UIScene extends Scene {
 
   private initListeners(): void {
     this.game.events.on(EVENTS_NAME.hpChange, this.updateLife, this);
+    this.game.events.on(EVENTS_NAME.coinChange, this.updateCoins, this);
     // this.game.events.on(EVENTS_NAME.beansChange, this.updateBeans, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
     this.game.events.on(EVENTS_NAME.dialogStarted, this.handleDialog, this);
