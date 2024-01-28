@@ -1,6 +1,6 @@
 import { Scene, Tilemaps } from 'phaser';
 import { BaseNPC, Enemy, Player, SlimeSpawner } from '../../classes';
-import { Croto, Guardia, Larissa, Mozart } from '../../classes/npcs';
+import { Croto, Guardia, Larissa, Mozart, Panchero } from '../../classes/npcs';
 import config from '../../config';
 import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
 
@@ -46,6 +46,9 @@ export class TestScene extends Scene {
         case 'Guardia':
           npc = new Guardia(this, obj.x!, obj.y!, this.player);
           break;
+        case 'Panchero':
+          npc = new Panchero(this, obj.x!, obj.y!, this.player);
+          break;
         default:
           return;
       }
@@ -65,6 +68,8 @@ export class TestScene extends Scene {
 
   // TODO: Improve this
   create(): void {
+    console.log('Scene.create()');
+
     this.map = this.make.tilemap({ key: 'plainsMap' });
 
     // add the tileset image we are using

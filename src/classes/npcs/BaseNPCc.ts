@@ -9,7 +9,7 @@ const NPC_TEXTURES: Record<string, string> = {
   Mozart: 'morzadella',
   Larissa: 'larissa',
   Guardia: 'guardia',
-  PanchoCobra: 'pancho_cobra',
+  Panchero: 'pancho_cobra',
   Edgar: 'edgar',
   Chespi: 'chespi',
 };
@@ -51,6 +51,10 @@ export class BaseNPC extends Actor {
       align: 'center',
       fontFamily: 'Times, serif',
       fontSize: '10px',
+    });
+
+    this.on('destroy', () => {
+      this.removeAllListeners();
     });
   }
 

@@ -45,12 +45,7 @@ export class UIScene extends Scene {
       );
 
       this.input.on('pointerdown', () => {
-        this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get('test-scene').scene.restart();
-        this.scene.restart();
-
-        this.maxHearts = 5;
-        this.createHearts();
+        window.location.reload();
       });
     };
   }
@@ -66,21 +61,11 @@ export class UIScene extends Scene {
   }
 
   createHearts() {
-    this.hearts = new Text(
-      this,
-      20,
-      20,
-      '💨'.repeat(this.maxHearts)
-    );
+    this.hearts = new Text(this, 20, 20, '💨'.repeat(this.maxHearts));
   }
 
   createCoins() {
-    this.coins = new Text(
-      this,
-      this.game.scale.width - this.game.scale.width / 8,
-      20,
-      ''
-    );
+    this.coins = new Text(this, this.game.scale.width - this.game.scale.width / 8, 20, '');
   }
 
   updateLife(life: number) {
