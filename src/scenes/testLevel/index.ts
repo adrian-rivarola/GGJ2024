@@ -1,7 +1,9 @@
 import { Scene, Tilemaps } from 'phaser';
-import { Enemy, Player, SlimeSpawner } from '../../classes';
-import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
+import { Enemy, BaseNPC, Player, SlimeSpawner } from '../../classes';
+import { Croto, Larissa, Mozart } from '../../classes/npcs';
 import config from '../../config';
+import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
+import { EVENTS_NAME } from '../../consts';
 
 export class TestScene extends Scene {
   constructor() {
@@ -10,6 +12,7 @@ export class TestScene extends Scene {
   private player!: Player;
   private enemies: Enemy[] = [];
   private map!: Tilemaps.Tilemap;
+  _rotation = 0;
 
   private wallsLayer!: Tilemaps.TilemapLayer;
 
@@ -25,6 +28,12 @@ export class TestScene extends Scene {
       this,
     );
     this.enemies = this.enemies.concat(newEnemies);
+  }
+
+  createNPCs() {
+    this.physics.add.collider(new Mozart(this, 120, 100, this.player), this.player);
+    this.physics.add.collider(new Croto(this, 120, 300, this.player), this.player);
+    this.physics.add.collider(new Larissa(this, 120, 400, this.player), this.player);
   }
 
   createSpawners() {
@@ -53,11 +62,11 @@ export class TestScene extends Scene {
     this.wallsLayer.setCollisionByProperty({ collides: true });
 
     // Player
-    this.player = new Player(this, 100, 100);
-
+    this.player = new Player(this, 50, 50);
     this.physics.add.collider(this.wallsLayer, this.player);
 
-    this.createSpawners();
+    // this.createSpawners();
+    this.createNPCs();
 
     if (config.debug) {
       const debugGraphics = this.add.graphics().setAlpha(0.7);
@@ -67,12 +76,17 @@ export class TestScene extends Scene {
       });
     }
 
+    // const joke = this.cache.json.get('joke');
+    // console.log(JSON.stringify({ joke }, undefined, 2));
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
     this.cameras.main.startFollow(this.player, true, 0.09, 0.09);
-    this.cameras.main.setZoom(2);
+    this.cameras.main.setZoom(1.8);
   }
 
   update(): void {
+    // this._rotation += 0.0125;
+    // this.cameras.main.setRotation(this._rotation);
+
     this.player.update();
     if (config.debug) {
       console.log('FPS: %d', this.game.loop.actualFps);

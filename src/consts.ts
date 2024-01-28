@@ -5,6 +5,9 @@ export enum EVENTS_NAME {
   attack = 'attack',
   hpChange = 'hp-change',
   beansChange = 'beans-change',
+  dialogAction = 'dialog-action',
+  dialogStarted = 'dialog-started',
+  dialogEnded = 'dialog-ended',
 }
 
 export enum GameStatus {

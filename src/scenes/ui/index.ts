@@ -2,6 +2,8 @@ import { GameObjects, Scene } from 'phaser';
 
 import { Text } from '../../classes/text';
 import { EVENTS_NAME, GameStatus } from '../../consts';
+import DialogOptions from '../../interfaces/DialogOptions';
+import { renderTextBox } from './renderDialog';
 
 enum HeartFrames {
   FULL_HEART = 530,
@@ -74,9 +76,14 @@ export class UIScene extends Scene {
     this.hearts.text = '💨'.repeat(life);
   }
 
+  handleDialog(options: DialogOptions) {
+    renderTextBox(this, options);
+  }
+
   private initListeners(): void {
     this.game.events.on(EVENTS_NAME.hpChange, this.updateLife, this);
     // this.game.events.on(EVENTS_NAME.beansChange, this.updateBeans, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
+    this.game.events.on(EVENTS_NAME.dialogStarted, this.handleDialog, this);
   }
 }

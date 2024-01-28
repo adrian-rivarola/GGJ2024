@@ -15,7 +15,7 @@ export class Slime extends Enemy {
   constructor(scene: Scene, x: number, y: number, texture: string, target: Player) {
     const attackHandler = () => {
       const yDiff = Math.abs(this.y - this.target.y);
-      if (yDiff >= 24) {
+      if (yDiff >= 32) {
         return;
       }
 
@@ -113,7 +113,8 @@ export class Slime extends Enemy {
         this.getBody().setVelocity(0, 0);
         this.play('idle');
 
-        this.scene.time.delayedCall(4000, () => {
+        const delay = 3000 + Math.random() * 2000;
+        this.scene.time.delayedCall(delay, () => {
           this.state = SlimeState.IDLE;
         });
       });

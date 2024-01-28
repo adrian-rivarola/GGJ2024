@@ -19,6 +19,7 @@ export class Player extends Actor {
   private pepper = false;
   private hpInterval!: NodeJS.Timeout;
   // private powerUpCollectedHandler: (type: string) => void;
+  disabled = false;
 
   constructor(scene: Scene, x: number, y: number) {
     super(scene, x, y, 'king');
@@ -30,6 +31,12 @@ export class Player extends Actor {
     this.keyD = this.scene.input.keyboard.addKey('D');
     this.keyShift = this.scene.input.keyboard.addKey(16);
     this.keySpace = this.scene.input.keyboard.addKey(32);
+
+    const keyZ = this.scene.input.keyboard.addKey('Z');
+
+    keyZ.on('down', (event: KeyboardEvent) => {
+      this.scene.game.events.emit(EVENTS_NAME.dialogAction, this);
+    });
 
     this.keyShift.on('down', (event: KeyboardEvent) => {
       this.fart();
@@ -91,7 +98,11 @@ export class Player extends Actor {
 
   update(): void {
     this.getBody().setVelocity(0);
-    const movement = 110 * (this.dash ? 3 : 1)
+    if (this.disabled) {
+      return;
+    }
+
+    const movement = 110 * (this.dash ? 3 : 1);
 
     if (this.keyW?.isDown) {
       this.body.velocity.y = -movement;
@@ -121,7 +132,7 @@ export class Player extends Actor {
   private fart(): void {
     this.getDamage(1);
     this.scene.sound.add(`fart${Math.floor(Math.random() * 10)}`).play();
-    const x = this.x + (!this.flipX ? -this.body.width : this.body.width)
+    const x = this.x + (!this.flipX ? -this.body.width : this.body.width);
     new Fart(this.scene, x, this.y, !this.flipX).anims.play('explosion', true);
   }
 

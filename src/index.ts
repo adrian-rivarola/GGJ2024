@@ -11,9 +11,9 @@ type GameConfigExtended = Types.Core.GameConfig & {
 
 export const gameConfig: GameConfigExtended = {
   title: 'Phaser game tutorial',
-  type: WEBGL,
+  type: Phaser.AUTO,
   parent: 'game',
-  backgroundColor: '#FFFFFF',
+  backgroundColor: '#000',
   scale: {
     mode: Scale.ScaleModes.NONE,
     width: window.innerWidth,
@@ -40,7 +40,7 @@ export const gameConfig: GameConfigExtended = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [LoadingScene, TestScene, Level1, UIScene],
+  scene: [LoadingScene, TestScene, UIScene],
   winScore: 40,
 };
 
