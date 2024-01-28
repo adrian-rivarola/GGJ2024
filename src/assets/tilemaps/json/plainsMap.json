@@ -994,6 +994,18 @@
                  "width":0,
                  "x":475.326148610323,
                  "y":288.145207033466
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"Panchero",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":743.051616562677,
+                 "y":96.4265456608055
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1002,7 +1014,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":12,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

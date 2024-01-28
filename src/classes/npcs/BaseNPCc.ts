@@ -9,6 +9,7 @@ const NPC_TEXTURES: Record<string, string> = {
   Mozart: 'king',
   Larissa: 'king',
   Guardia: 'king',
+  Panchero: 'king',
 };
 
 export class BaseNPC extends Actor {
@@ -48,6 +49,10 @@ export class BaseNPC extends Actor {
       align: 'center',
       fontFamily: 'Times, serif',
       fontSize: '10px',
+    });
+
+    this.on('destroy', () => {
+      this.removeAllListeners();
     });
   }
 
