@@ -11,7 +11,6 @@ export class Larissa extends BaseNPC {
 
   startDialog(): void {
     super.startDialog();
-    console.log('Larissa.startDialog()');
 
     const options: DialogOptions = {
       npc: this,

@@ -8,6 +8,7 @@ const NPC_TEXTURES: Record<string, string> = {
   Croto: 'king',
   Mozart: 'king',
   Larissa: 'king',
+  Guardia: 'king',
 };
 
 export class BaseNPC extends Actor {
@@ -40,42 +41,30 @@ export class BaseNPC extends Actor {
       },
       this,
     );
+
+    this.scene.add.text(this.x - 8, this.y + 12, this.name, {
+      color: 'black',
+      align: 'center',
+      fontFamily: 'Times, serif',
+      fontSize: '10px',
+    });
   }
 
   startDialog() {
     this.player.disabled = true;
   }
 
-  initAnimations() {
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNames('slimeAtlas', {
-        prefix: 'idle-',
-        end: 3,
-      }),
-      repeat: -1,
-      frameRate: 8,
-    });
-
-    this.anims.play('idle', true);
-  }
-
-  // isNearPlayer() {
-  //   if (
-  //     PhaserMath.Distance.BetweenPoints(
-  //       { x: this.x, y: this.y },
-  //       { x: this.target.x, y: this.target.y },
-  //     ) < this.AGRESSION_RADIUS
-  //   ) {
-  //     this.getBody().setVelocityX((this.target.x - this.x) * 0.5);
-  //     this.getBody().setVelocityY((this.target.y - this.y) * 0.5);
-  //     this.checkFlip();
-  //     this.play('walk', true);
-  //     this.state = SlimeState.FOLLOW;
-  //   } else if (this.state === SlimeState.FOLLOW) {
-  //     this.play('idle', true);
-  //     this.state = SlimeState.IDLE;
-  //   }
+  // initAnimations() {
+  //   this.anims.create({
+  //     key: 'idle',
+  //     frames: this.anims.generateFrameNames('slimeAtlas', {
+  //       prefix: 'idle-',
+  //       end: 3,
+  //     }),
+  //     repeat: -1,
+  //     frameRate: 8,
+  //   });
+  //   this.anims.play('idle', true);
   // }
 
   protected checkFlip(): void {

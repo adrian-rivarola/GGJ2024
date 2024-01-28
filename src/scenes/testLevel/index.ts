@@ -1,9 +1,8 @@
 import { Scene, Tilemaps } from 'phaser';
-import { Enemy, BaseNPC, Player, SlimeSpawner } from '../../classes';
-import { Croto, Larissa, Mozart } from '../../classes/npcs';
+import { BaseNPC, Enemy, Player, SlimeSpawner } from '../../classes';
+import { Croto, Guardia, Larissa, Mozart } from '../../classes/npcs';
 import config from '../../config';
 import { gameObjectsToObjectPoints } from '../../helpers/gameobject-to-object-point';
-import { EVENTS_NAME } from '../../consts';
 
 export class TestScene extends Scene {
   constructor() {
@@ -31,9 +30,27 @@ export class TestScene extends Scene {
   }
 
   createNPCs() {
-    this.physics.add.collider(new Mozart(this, 120, 100, this.player), this.player);
-    this.physics.add.collider(new Croto(this, 120, 300, this.player), this.player);
-    this.physics.add.collider(new Larissa(this, 120, 400, this.player), this.player);
+    this.map.getObjectLayer('NPC').objects.forEach((obj) => {
+      let npc: BaseNPC;
+
+      switch (obj.name) {
+        case 'Mozart':
+          npc = new Mozart(this, obj.x!, obj.y!, this.player);
+          break;
+        case 'Croto':
+          npc = new Croto(this, obj.x!, obj.y!, this.player);
+          break;
+        case 'Larissa':
+          npc = new Larissa(this, obj.x!, obj.y!, this.player);
+          break;
+        case 'Guardia':
+          npc = new Guardia(this, obj.x!, obj.y!, this.player);
+          break;
+        default:
+          return;
+      }
+      this.physics.add.collider(npc, this.player);
+    });
   }
 
   createSpawners() {
@@ -76,8 +93,6 @@ export class TestScene extends Scene {
       });
     }
 
-    // const joke = this.cache.json.get('joke');
-    // console.log(JSON.stringify({ joke }, undefined, 2));
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
     this.cameras.main.startFollow(this.player, true, 0.09, 0.09);
     this.cameras.main.setZoom(1.8);
