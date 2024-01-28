@@ -43,20 +43,25 @@ export class Player extends Actor {
 
     this.keyShift.on('down', (event: KeyboardEvent) => {
       this.fart();
-      this.anims.play('dash', true);
+      // this.anims.play('dash', true);
       this.dash = true;
       this.body.checkCollision.none = true;
 
-      this.on('animationcomplete', () => {
+      setTimeout(() => {
         this.dash = false;
         this.body.checkCollision.none = false;
-      });
+      }, 500)
+
+      // this.on('animationcomplete', () => {
+      //   this.dash = false;
+      //   this.body.checkCollision.none = false;
+      // });
     });
 
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.enemiesHit = 0;
       this.fart();
-      this.anims.play('attack', true);
+      // this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
 
@@ -116,26 +121,26 @@ export class Player extends Actor {
 
     if (this.keyW?.isDown) {
       this.body.velocity.y = -movement;
-      !this.anims.isPlaying && this.anims.play('run', true);
+      // !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyA?.isDown) {
       this.body.velocity.x = -movement;
       this.checkFlip();
       // this.getBody().setOffset(30, 15);
-      !this.anims.isPlaying && this.anims.play('run', true);
+      // !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyS?.isDown) {
       this.body.velocity.y = movement;
-      !this.anims.isPlaying && this.anims.play('run', true);
+      // !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyD?.isDown) {
       this.body.velocity.x = movement;
       this.checkFlip();
       // this.getBody().setOffset(15, 15);
-      !this.anims.isPlaying && this.anims.play('run', true);
+      // !this.anims.isPlaying && this.anims.play('run', true);
     }
   }
 
