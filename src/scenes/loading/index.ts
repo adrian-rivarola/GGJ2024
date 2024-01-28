@@ -9,7 +9,8 @@ export class LoadingScene extends Scene {
     this.load.baseURL = 'assets/';
 
     // PLAYER LOADING
-    this.load.image('king', 'sprites/char.png');
+    this.load.image('king', 'sprites/king.png');
+    this.load.image('char', 'sprites/char.png');
     this.load.image('chespi', 'sprites/npcs/Chespi.png');
     this.load.image('croto', 'sprites/npcs/Croto.png');
     this.load.image('edgar', 'sprites/npcs/Edgar.png');
@@ -19,6 +20,7 @@ export class LoadingScene extends Scene {
     this.load.image('pancho_cobra', 'sprites/npcs/PanchoCobra.png');
 
     this.load.atlas('a-king', 'spritesheets/a-king.png', 'spritesheets/a-king_atlas.json');
+    this.load.atlas('chespi_atlas', 'sprites/chespi.png', 'spritesheets/chespi_atlas.json');
 
     // MAP LOADING
     this.load.image({

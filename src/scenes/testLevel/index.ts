@@ -18,6 +18,7 @@ export class TestScene extends Scene {
 
   addEnemies(newEnemies: Enemy[]) {
     this.physics.add.collider(newEnemies, this.wallsLayer);
+    this.physics.add.collider(newEnemies, newEnemies);
     this.physics.add.collider(
       this.player,
       newEnemies,
@@ -61,7 +62,6 @@ export class TestScene extends Scene {
     const enemiesPoints = gameObjectsToObjectPoints(
       this.map.filterObjects('ChespiSpawner', (obj) => obj.name === 'ChespiSpawner'),
     );
-    console.log('creating chespi spawner: %d', enemiesPoints);
     enemiesPoints.forEach((obj) => {
       const spawner = new ChespiSpawner(this, obj.x, obj.y, '', this.player);
       this.addEnemies(spawner.createEnemies());

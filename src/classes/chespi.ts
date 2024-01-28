@@ -4,7 +4,7 @@ import { Enemy } from './enemy';
 import { Player } from './player';
 
 export class Chespi extends Enemy {
-  constructor(scene: Scene, x: number, y: number, texture: string, target: Player) {
+  constructor(scene: Scene, x: number, y: number, target: Player) {
     const attackHandler = () => {
       const yDiff = Math.abs(this.y - this.target.y);
       if (yDiff >= 32) {
@@ -40,14 +40,34 @@ export class Chespi extends Enemy {
         }
       }
     };
-    super(scene, x, y, target, texture, attackHandler);
+    super(scene, x, y, target, 'king', attackHandler);
 
     // this.target = target;
     this.scale = 1.5;
 
     // PHYSICS MODEL
-    this.getBody().setSize(16, 16);
-    this.getBody().setOffset(8, 8);
+    this.getBody().setSize(15, 20);
+    this.getBody().setOffset(-2, 0);
+
+    this.initAnimations();
+  }
+
+  private initAnimations(): void {
+    const frames = this.scene.anims.generateFrameNames('chespi_atlas', {
+      prefix: 'sprite',
+      start: 1,
+      end: 4,
+    });
+
+    console.log(frames);
+
+    this.scene.anims.create({
+      key: 'idle',
+      frames,
+      repeat: -1,
+      frameRate: 8,
+    });
+    this.anims.play('idle');
   }
 
   preUpdate(time: number, delta: number): void {

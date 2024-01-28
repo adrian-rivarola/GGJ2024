@@ -25,7 +25,7 @@ export class Player extends Actor {
   scale = 1.5;
 
   constructor(scene: Scene, x: number, y: number) {
-    super(scene, x, y, 'king');
+    super(scene, x, y, 'char');
 
     // KEYS
     this.keyW = this.scene.input.keyboard.addKey('W');
@@ -50,7 +50,7 @@ export class Player extends Actor {
       setTimeout(() => {
         this.dash = false;
         this.body.checkCollision.none = false;
-      }, 500)
+      }, 500);
 
       // this.on('animationcomplete', () => {
       //   this.dash = false;

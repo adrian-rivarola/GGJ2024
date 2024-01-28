@@ -56,7 +56,7 @@ export class ChespiSpawner extends Actor {
     for (let idx = 0; idx < newEnemies; idx++) {
       const x = Math.Between(this.x - this.SPAWN_RADIUS, this.x + this.SPAWN_RADIUS);
       const y = Math.Between(this.y - this.SPAWN_RADIUS, this.y + this.SPAWN_RADIUS);
-      const enemy = new Chespi(this.scene, x, y, 'king', this.target);
+      const enemy = new Chespi(this.scene, x, y, this.target);
       enemies.push(enemy);
     }
     return enemies;
