@@ -14,9 +14,7 @@ export class Player extends Actor {
   // private hpText!: Text;
   private maxHitsPerAttack = 2;
   private enemiesHit = 0;
-  private beans = 0;
   private maxHP = 90;
-  private maxBeans = 10;
   private dash = false;
   private pepper = false;
   private powerUpCollectedHandler: (type: string) => void;
@@ -33,23 +31,21 @@ export class Player extends Actor {
     this.keySpace = this.scene.input.keyboard.addKey(32);
 
     this.keyShift.on('down', (event: KeyboardEvent) => {
-      if (this.beans > 0) {
-        this.beans--;
-        this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
-        this.fart();
-        this.anims.play('dash', true);
-        this.dash = true;
-        this.body.checkCollision.none = true;
-  
-        this.on('animationcomplete', () => {
-          this.dash = false;
-          this.body.checkCollision.none = false;
-        });
-      }
+      this.getDamage(5);
+      this.fart();
+      this.anims.play('dash', true);
+      this.dash = true;
+      this.body.checkCollision.none = true;
+
+      this.on('animationcomplete', () => {
+        this.dash = false;
+        this.body.checkCollision.none = false;
+      });
     });
 
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.enemiesHit = 0;
+      this.getDamage(5);
       this.fart();
       this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
@@ -70,13 +66,12 @@ export class Player extends Actor {
     this.powerUpCollectedHandler = (type: string) => {
       switch (type) {
         case 'Bean':
-          if (this.beans < this.maxBeans) {
-            this.updateBeans(1);
+          if (this.hp < this.maxHP) {
+            this.updateHp(15);
           }
           break;
         case 'Pepper':
           this.pepper = true;
-          this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
           break;
       }
     };
@@ -90,11 +85,6 @@ export class Player extends Actor {
 
   get normalizedHP() {
     return Math.floor(this.hp / 15);
-  }
-
-  updateBeans(value: number) {
-    this.beans = Phaser.Math.Clamp(this.beans + value, 0, this.maxBeans);
-    this.scene?.game.events.emit(EVENTS_NAME.beansChange, this.beans, this.pepper);
   }
 
   updateHp(value: number) {

@@ -27,7 +27,7 @@ export class Actor extends Physics.Arcade.Sprite {
       alpha: 0.7,
       onStart: () => {
         if (value) {
-          this.tint = 0xff3333;
+          // this.tint = 0xff3333;
           this.hp = this.hp - value;
         }
       },

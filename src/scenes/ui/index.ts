@@ -59,9 +59,9 @@ export class UIScene extends Scene {
     this.initListeners();
 
     this.createHearts();
-    this.createBeans();
+    // this.createBeans();
     this.updateLife(this.maxHearts * 2);
-    this.updateBeans(0, false);
+    // this.updateBeans(0, false);
   }
 
   createHearts() {
@@ -121,7 +121,7 @@ export class UIScene extends Scene {
 
   private initListeners(): void {
     this.game.events.on(EVENTS_NAME.hpChange, this.updateLife, this);
-    this.game.events.on(EVENTS_NAME.beansChange, this.updateBeans, this);
+    // this.game.events.on(EVENTS_NAME.beansChange, this.updateBeans, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
   }
 }
