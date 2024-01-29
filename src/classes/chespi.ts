@@ -6,6 +6,8 @@ import { Player } from './player';
 export class Chespi extends Enemy {
   constructor(scene: Scene, x: number, y: number, target: Player) {
     const attackHandler = () => {
+      console.log('chespi.attackHandler()');
+
       const yDiff = Math.abs(this.y - this.target.y);
       if (yDiff >= 32) {
         return;
@@ -17,30 +19,28 @@ export class Chespi extends Enemy {
           { x: this.x, y: this.y },
           { x: this.target.x, y: this.target.y },
         ) <
-          this.target.width * 0.75
+          this.target.width * 1.25
       ) {
         this.disableBody(true, false);
         this.target.onEnemyKilled();
 
-        this.anims.play('dead');
-
-        try {
-          this.scene.tweens.add({
-            targets: this,
-            duration: 600,
-            repeat: 1,
-            delay: 500,
-            onComplete: () => {
-              this.setAlpha(0);
-              this.destroy();
-            },
-          });
-        } catch (err) {
-          console.error(err);
-        }
+        // try {
+        this.scene.tweens.add({
+          targets: this,
+          duration: 100,
+          repeat: 1,
+          delay: 500,
+          alpha: 0,
+          onComplete: () => {
+            this.destroy();
+          },
+        });
+        // } catch (err) {
+        //   console.error(err);
+        // }
       }
     };
-    super(scene, x, y, target, 'king', attackHandler);
+    super(scene, x, y, target, '', attackHandler);
 
     // this.target = target;
     this.scale = 1.5;
@@ -58,8 +58,6 @@ export class Chespi extends Enemy {
       start: 1,
       end: 4,
     });
-
-    console.log(frames);
 
     this.scene.anims.create({
       key: 'idle',

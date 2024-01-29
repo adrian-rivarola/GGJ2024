@@ -10,7 +10,7 @@ import { Chespi } from './chespi';
 export class ChespiSpawner extends Actor {
   private target: Player;
   private SPAWN_RADIUS = 20;
-  private ACTIVATION_RADIUS = 100;
+  private ACTIVATION_RADIUS = 150;
   private COOL_DOWN_DURATION = 200;
   private coolDownTimer = 0;
   private MIN_SPAWNS = 0;

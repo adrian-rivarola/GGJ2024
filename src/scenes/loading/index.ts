@@ -25,6 +25,18 @@ export class LoadingScene extends Scene {
 
     this.load.atlas('a-king', 'spritesheets/a-king.png', 'spritesheets/a-king_atlas.json');
     this.load.atlas('chespi_atlas', 'sprites/chespi.png', 'spritesheets/chespi_atlas.json');
+    this.load.atlas(
+      'char_walk_atlas',
+      'sprites/char_walking.png',
+      'spritesheets/char_walk_atlas.json',
+    );
+    this.load.atlas('char_idle_atlas', 'sprites/char.png', 'spritesheets/char_idle_atlas.json');
+    this.load.atlas('char_dash_atlas', 'sprites/fartdash.png', 'spritesheets/char_dash_atlas.json');
+    this.load.atlas(
+      'char_attack_atlas',
+      'sprites/attack.png',
+      'spritesheets/char_attack_atlas.json',
+    );
 
     // MAP LOADING
     this.load.image({

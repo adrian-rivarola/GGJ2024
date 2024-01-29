@@ -20,6 +20,7 @@ export class Player extends Actor {
   private coins = 0;
   private maxCoins = 3;
   private hpInterval!: NodeJS.Timeout;
+  private takeDamage = true;
   // private powerUpCollectedHandler: (type: string) => void;
   disabled = false;
   scale = 1.5;
@@ -43,7 +44,7 @@ export class Player extends Actor {
 
     this.keyShift.on('down', (event: KeyboardEvent) => {
       this.fart();
-      // this.anims.play('dash', true);
+      this.anims.play('dash', true);
       this.dash = true;
       this.body.checkCollision.none = true;
 
@@ -52,16 +53,16 @@ export class Player extends Actor {
         this.body.checkCollision.none = false;
       }, 500);
 
-      // this.on('animationcomplete', () => {
-      //   this.dash = false;
-      //   this.body.checkCollision.none = false;
-      // });
+      this.on('animationcomplete', () => {
+        this.dash = false;
+        this.body.checkCollision.none = false;
+      });
     });
 
-    this.keySpace.on('down', (event: KeyboardEvent) => {
+    this.keySpace.on('up', (event: KeyboardEvent) => {
       this.enemiesHit = 0;
       this.fart();
-      // this.anims.play('attack', true);
+      this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
 
@@ -73,7 +74,7 @@ export class Player extends Actor {
     this.initListeners();
 
     // ANIMATIONS
-    // this.initAnimations();
+    this.initAnimations();
     this.setDepth(10);
 
     this.hpInterval = setInterval(() => {
@@ -84,7 +85,7 @@ export class Player extends Actor {
       if (Date.now() % 5 == 0) {
         this.fart();
       }
-    }, 2000);
+    }, 3000);
 
     this.on('destroy', () => {
       this.keySpace.removeAllListeners();
@@ -121,26 +122,30 @@ export class Player extends Actor {
 
     if (this.keyW?.isDown) {
       this.body.velocity.y = -movement;
-      // !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyA?.isDown) {
       this.body.velocity.x = -movement;
       this.checkFlip();
       // this.getBody().setOffset(30, 15);
-      // !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyS?.isDown) {
       this.body.velocity.y = movement;
-      // !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play('run', true);
     }
 
     if (this.keyD?.isDown) {
       this.body.velocity.x = movement;
       this.checkFlip();
       // this.getBody().setOffset(15, 15);
-      // !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play('run', true);
+    }
+
+    if (this.body.velocity.x === 0 && this.body.velocity.y === 0) {
+      !this.anims.isPlaying && this.anims.play('idle', true);
     }
   }
 
@@ -162,29 +167,42 @@ export class Player extends Actor {
   private initAnimations(): void {
     this.scene.anims.create({
       key: 'run',
-      frames: this.scene.anims.generateFrameNames('a-king', {
-        prefix: 'run-',
-        end: 7,
+      frames: this.scene.anims.generateFrameNames('char_walk_atlas', {
+        prefix: 'sprite',
+        start: 6,
+        end: 11,
       }),
-      frameRate: 8,
+      frameRate: 15,
+    });
+
+    this.scene.anims.create({
+      key: 'idle',
+      frames: this.scene.anims.generateFrameNames('char_idle_atlas', {
+        prefix: 'idle',
+        start: 1,
+        end: 1,
+      }),
+      frameRate: 1,
     });
 
     this.scene.anims.create({
       key: 'dash',
-      frames: this.scene.anims.generateFrameNames('a-king', {
-        prefix: 'attack-',
-        end: 2,
+      frames: this.scene.anims.generateFrameNames('char_dash_atlas', {
+        prefix: 'sprite',
+        start: 1,
+        end: 3,
       }),
       frameRate: 8,
     });
 
     this.scene.anims.create({
       key: 'attack',
-      frames: this.scene.anims.generateFrameNames('a-king', {
-        prefix: 'attack-',
-        end: 2,
+      frames: this.scene.anims.generateFrameNames('char_attack_atlas', {
+        prefix: 'sprite',
+        start: 1,
+        end: 5,
       }),
-      frameRate: 8,
+      frameRate: 12,
     });
   }
 
@@ -196,9 +214,10 @@ export class Player extends Actor {
   }
 
   public getDamage(value?: number): void {
-    if (!value || this.dash) return;
+    if (!value || this.dash || !this.takeDamage) return;
 
     super.getDamage(value);
+    this.takeDamage = false;
 
     if (this.hp <= 0) {
       clearInterval(this.hpInterval);
@@ -206,6 +225,10 @@ export class Player extends Actor {
     }
 
     this.updateHp(-value);
-    this.scene.time.delayedCall(100, () => this.clearTint());
+    // this.scene.time.delayedCall(100, () => this.clearTint());
+    this.scene.time.delayedCall(100, () => {
+      this.clearTint();
+      this.takeDamage = true;
+    });
   }
 }

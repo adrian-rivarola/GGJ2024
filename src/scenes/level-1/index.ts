@@ -82,7 +82,7 @@ export class Level1 extends Scene {
       this.player,
       newEnemies,
       (obj1, obj2) => {
-        (obj1 as Player).getDamage(0.25);
+        (obj1 as Player).getDamage(0.125);
       },
       undefined,
       this,
