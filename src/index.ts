@@ -1,6 +1,6 @@
 import { Game, Scale, Types, WEBGL } from 'phaser';
 
-import { Level1, TestScene, UIScene } from './scenes';
+import { Intro, Level1, TestScene, UIScene } from './scenes';
 import { LoadingScene } from './scenes/loading';
 
 import config from './config';
@@ -40,7 +40,7 @@ export const gameConfig: GameConfigExtended = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [LoadingScene, TestScene, UIScene],
+  scene: [LoadingScene, Intro, TestScene, UIScene],
   winScore: 40,
 };
 

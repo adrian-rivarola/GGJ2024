@@ -9,6 +9,10 @@ export class LoadingScene extends Scene {
     this.load.baseURL = 'assets/';
 
     // PLAYER LOADING
+    this.load.image('intro-1', 'tilemaps/tiles/dungeon-16-16.png');
+    this.load.image('intro-2', 'sprites/char.png');
+    this.load.image('intro-3', 'sprites/npcs/Chespi.png');
+    this.load.image('intro-4', 'sprites/npcs/Croto.png');
     this.load.image('king', 'sprites/king.png');
     this.load.image('char', 'sprites/char.png');
     this.load.image('chespi', 'sprites/npcs/Chespi.png');
@@ -58,7 +62,6 @@ export class LoadingScene extends Scene {
   }
 
   create(): void {
-    this.scene.start('test-scene');
-    this.scene.start('ui-scene');
+    this.scene.start('intro-scene');
   }
 }
