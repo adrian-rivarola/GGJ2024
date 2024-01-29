@@ -13,8 +13,8 @@ export class ChespiSpawner extends Actor {
   private ACTIVATION_RADIUS = 150;
   private COOL_DOWN_DURATION = 200;
   private coolDownTimer = 0;
-  private MIN_SPAWNS = 0;
-  private MAX_SPAWNS = 1;
+  private MIN_SPAWNS = 1;
+  private MAX_SPAWNS = 2;
 
   constructor(
     scene: Scene,

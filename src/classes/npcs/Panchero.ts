@@ -14,8 +14,8 @@ export class Panchero extends BaseNPC {
 
     const options: DialogOptions = {
       npc: this,
-      message: "I'm Panchero Cobra",
-      answers: ['Aceptar pancho', 'Rechazar pancho'],
+      message: 'Buenas noches, desea un hot dog extremo?',
+      answers: ['Sí', 'No'],
     };
     this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
 

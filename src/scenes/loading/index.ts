@@ -74,6 +74,7 @@ export class LoadingScene extends Scene {
   }
 
   create(): void {
-    this.scene.start('intro-scene');
+    this.scene.start('test-scene');
+    this.scene.start('ui-scene');
   }
 }

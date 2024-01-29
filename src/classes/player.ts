@@ -17,7 +17,7 @@ export class Player extends Actor {
   private maxHP = 5;
   private dash = false;
   private pepper = false;
-  private coins = 0;
+  coins = 0;
   private maxCoins = 3;
   private hpInterval!: NodeJS.Timeout;
   private takeDamage = true;

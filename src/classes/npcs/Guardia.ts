@@ -13,10 +13,23 @@ export class Guardia extends BaseNPC {
   startDialog(): void {
     super.startDialog();
 
+    if (this.player.coins < 3) {
+      this.requestMoney();
+    } else {
+      const options: DialogOptions = {
+        npc: this,
+        message: 'Lo siento, el baño ya está cerrado por hoy',
+        answers: ['...'],
+      };
+      this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
+    }
+  }
+
+  requestMoney() {
     const options: DialogOptions = {
       npc: this,
-      message: 'Soy un guardia',
-      answers: ['[Opcion 1]', '[Opcion 2]'],
+      message: 'Que haces? Cuesta 3 doblones usar NUESTRO inodoro',
+      answers: ['Ok'],
     };
     this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
 
@@ -28,6 +41,5 @@ export class Guardia extends BaseNPC {
         this.done = true;
       }
     });
-    // onEnd: Empiezen a aparecer monedas
   }
 }

@@ -5,17 +5,21 @@ import DialogOptions from '../../interfaces/DialogOptions';
 import { Player } from '../player';
 
 export class Larissa extends BaseNPC {
+  private vanished = false;
   constructor(scene: Scene, x: number, y: number, player: Player) {
     super(scene, x, y, 'Larissa', player);
   }
 
   startDialog(): void {
+    if (this.vanished) {
+      return;
+    }
     super.startDialog();
 
     const options: DialogOptions = {
       npc: this,
-      message: 'Un baño? ....',
-      answers: ['Gracias', '*Farts*'],
+      message: '... Si, hay un inodoro en la plaza hacia mi izquierda',
+      answers: ['Grrrracias', '*Farts*'],
     };
     this.scene.game.events.emit(EVENTS_NAME.dialogStarted, options);
 
@@ -26,7 +30,8 @@ export class Larissa extends BaseNPC {
           duration: 1500,
           alpha: 0,
           onComplete: () => {
-            this.destroy();
+            this.disableBody();
+            this.vanished = true;
           },
         });
       }
