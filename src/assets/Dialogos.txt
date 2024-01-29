@@ -1,0 +1,111 @@
+
+Larissa: ... Si, hay un inodoro en la plaza hacia mi izquierda ... Date Prisa
+Rpta: Grrrracias
+Ends
+Rpta: Fat fart
+Larissa: That`s soooo disgusting... mans 
+Se desvanece 
+
+Guardia: Que haces? Cuesta 3 doblones usar NUESTRO inodoro. Vuelve cuando los tengas
+(Busca 3 doblones)
+
+{Pista: Algunos chespys dropean dinero, no te preocupes, nadie los espera en casa anyways}
+
+Pancho Cobra: Buenas noches, desea un hot dog extremo?
+
+{Pista: dudoso resultado}
+
+Rpta: Si
+Te Casgaste
+Rpta: No
+
+Croto: A what?
+Rpta1: forget it
+Ends
+Rpta1: Un baño
+Croto: Ohh un baño 
+Rpta: Si un baño
+Croto: A what?
+
+Intereacciòn Guardia 1: Usar el baño cuesta (3)
+Ends
+
+Text: Encuentra 3 doblones 
+
+Interacciòn Guardia 2: Que crees que haces? Usar Nuestro baño cuesta (3)
+
+Guardia: Mi padre cuido esta baño, y su padre antes que el, no usaràs NUESTRO inodoro sin pagar esos 3 doblones
+
+Edgar: En cualquier lugar que un hombre tenga un shit requirement, es el trabajo del samaritano proveer de ayuda
+hay un baño en un local cercano, vamos
+
+Nivel 2
+
+Edgar: El baño està a al fondo a la derecha
+Player: Fart
+Edgar: no tenemos mucho tiempo, hurry up
+
+Evento:
+Cantinero: ... EL BAÑO ES SÒLO PARA CLIENTES!!!... Gracias
+
+Cantinero: Quieres comprar un?
+Player dame todo, algo.
+Cantinero: Comprar sot de vodka
+Si
+End efecto.
+No 
+Ends
+
+Chespy evento: Hey amigo tienes un momento?
+Rpta: Si
+Rpta No
+Genial amigo, mira tengo una peluca caseras de mi casa, hecha de pelos artesanales propios de mi cuerpo,templo y casa hechas por mi en mi casa, solo cuestan (1)
+Rpta: yo sòlo... quiero...
+Mira amigo es para apoyar, mi gato Mozart no come hace dìas, y yo tengo que comer hno.
+Rpta: Me estoy.. quiero cag..
+Oye hno en serio no tengo nada para comer, tuve que comerme una pierna de Panchito y eso s`òlo
+Rpta: Te voy a dar una ensalada de puñetazos
+Rpta: cagarse encima
+Oye hno tranquilo, no tienes porque ponerte asì yo sòlo quiero un poco de tu tiem
+Rpta: LAS BOLAS
+Rpta: Cagarse encima
+Ok man lo entiendo, podìas decir un simple no y ya
+Rpta: Cagarse encima
+Rpta: Cagarse encima
+
+
+Tocar la puerta
+Player: Me cagoooooo
+NPC: Ocupao
+Player: *TOC* *TOC* *TOC*
+NPC: Que està ocupao
+Player: *Golpea la puerte efusivamente*
+NPC: DEJA CAGAAAR WN
+Player: Ya saaaaal!!
+NPC: Dame chance YA SALGOOO
+Player: *derriba la puerta impulsado por un pedo*
+NPC: AHHHH *corre efusivamente*
+
+
+
+Finalmente has llegado a tus destino
+
+Sientes la paz y la sosobra, cuya ùnica explicaciòn puede ser la familiaridad de la privacidad que da un baño
+Sgte
+El camino fue màs largo de lo esperado, la espera màs  dolorosa de lo concebible
+Sgte
+Vas perdiendo la batalla, la calma se apodera de tu corazòn, tu esfinger se relaja
+Sgte
+La dilataciòn va viento en popa
+Sgte
+Los obstaculos superado quedan en el pasado
+Sgte
+Que es de esta vida sino vivir la felicidad del desafìo
+Sgte
+Pero a fin de cuentas, estàs en tu meta, te diste cuenta que suplir la necesidad del momento, suple la felicidad que tanto añorabas
+Sgte
+Te aproximas al baño
+
+
+
+Crèditos  
